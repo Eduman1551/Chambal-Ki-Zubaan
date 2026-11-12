@@ -18,6 +18,7 @@ export default function TitleScreen({ onStart }: Props) {
   return (
     <section
       id="title"
+      data-stop={0}
       className="scene relative flex min-h-[100svh] flex-col overflow-hidden"
       style={{ background: 'linear-gradient(#14506B 0%, #1F8A9E 38%, #F7C98B 78%, #FFE9C4 100%)' }}
     >

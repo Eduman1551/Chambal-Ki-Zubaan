@@ -1,6 +1,10 @@
 import { MotionConfig } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import Journey from './components/Journey'
+import { scrollToId } from './components/Scene'
 import TitleScreen from './components/TitleScreen'
+import Hud from './components/hud/Hud'
+import { useScrollJourney } from './hooks/useScrollJourney'
 import { getWaterColors } from './logic/waterColor'
 import { useHealth, useRiverStore } from './state/useRiverStore'
 
@@ -8,6 +12,9 @@ export default function App() {
   const phase = useRiverStore((s) => s.phase)
   const start = useRiverStore((s) => s.start)
   const health = useHealth()
+  const rootRef = useRef<HTMLElement>(null)
+
+  useScrollJourney(rootRef)
 
   // River Health -> live water colours (CSS variables used by every wave).
   useEffect(() => {
@@ -18,22 +25,24 @@ export default function App() {
     root.setProperty('--water-deep', deep)
   }, [health])
 
-  // The page cannot scroll until the player presses Start.
+  // The page cannot be scrolled by hand until the player presses Start.
   useEffect(() => {
     document.body.style.overflow = phase === 'title' ? 'hidden' : ''
   }, [phase])
 
   const handleStart = () => {
     start()
-    // Wait one frame so the journey is rendered before scrolling to it.
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => document.getElementById('stop-1')?.scrollIntoView({ behavior: 'smooth' })),
-    )
+    document.body.style.overflow = ''
+    scrollToId('stop-1')
   }
 
   return (
     <MotionConfig reducedMotion="user">
-      <TitleScreen onStart={handleStart} />
+      <Hud />
+      <main ref={rootRef}>
+        <TitleScreen onStart={handleStart} />
+        <Journey />
+      </main>
     </MotionConfig>
   )
 }
