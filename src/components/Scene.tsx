@@ -68,7 +68,7 @@ export function StoryCard({
 }) {
   return (
     <div className={`card reveal w-full max-w-xl p-5 md:p-8 ${className}`}>
-      <p className="mb-2 text-sm font-bold tracking-wide text-river uppercase md:text-base">{kicker}</p>
+      <p className="mb-2 text-sm font-bold tracking-wide text-[#17708A] uppercase md:text-base">{kicker}</p>
       <h2 className="mb-3 text-3xl text-deep md:text-4xl">{title}</h2>
       {children}
     </div>

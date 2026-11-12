@@ -8,6 +8,7 @@ import Hud from './components/hud/Hud'
 import GhariyalGuru from './components/mascot/GhariyalGuru'
 import { useScrollJourney } from './hooks/useScrollJourney'
 import { getWaterColors } from './logic/waterColor'
+import { sfx } from './sound/sfx'
 import { useHealth, useRiverStore } from './state/useRiverStore'
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
 
   const handleStart = () => {
     start()
+    sfx.splash()
     document.body.style.overflow = ''
     scrollToId('stop-1')
   }
@@ -44,8 +46,11 @@ export default function App() {
       <GhariyalGuru />
       <main ref={rootRef}>
         <TitleScreen onStart={handleStart} />
-        <Journey />
-        <Ending />
+        {/* until Start is pressed the journey cannot be reached by keyboard either */}
+        <div inert={phase === 'title'}>
+          <Journey />
+          <Ending />
+        </div>
       </main>
     </MotionConfig>
   )

@@ -9,7 +9,8 @@ gsap.registerPlugin(ScrollTrigger)
  * Wires the scroll journey with GSAP ScrollTrigger:
  *  1. tracks which stop is on screen (for the HUD and the mascot),
  *  2. slides scenery layers sideways while scrolling ("travelling downstream"),
- *  3. reveals each stop's cards as it enters.
+ *  3. reveals each stop's cards as it enters,
+ *  4. pauses the CSS animations of scenes that are off screen.
  * Parallax and reveals are skipped when the user prefers reduced motion.
  */
 export function useScrollJourney(rootRef: RefObject<HTMLElement | null>) {
@@ -64,6 +65,17 @@ export function useScrollJourney(rootRef: RefObject<HTMLElement | null>) {
       })
     }, root)
 
-    return () => ctx.revert()
+    // 4. performance: scenes that are off screen get paused CSS animations (see index.css).
+    //    Fail-safe: if the observer never fires, nothing is paused.
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.target.classList.toggle('off-screen', !e.isIntersecting)),
+      { rootMargin: '100px 0px' },
+    )
+    root.querySelectorAll('.scene').forEach((scene) => observer.observe(scene))
+
+    return () => {
+      observer.disconnect()
+      ctx.revert()
+    }
   }, [rootRef])
 }

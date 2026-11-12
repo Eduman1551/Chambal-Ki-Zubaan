@@ -302,6 +302,11 @@ button {
   }
 }
 
+/* Performance: scenes that are off screen do not animate (class set by an IntersectionObserver). */
+.scene.off-screen * {
+  animation-play-state: paused !important;
+}
+
 /* ── Treatment slider (Stop 3) ── */
 .valve-slider {
   -webkit-appearance: none;

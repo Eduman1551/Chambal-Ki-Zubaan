@@ -54,7 +54,7 @@ export default function Ending() {
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pt-24 pb-16 md:px-8">
         {/* ── Result ── */}
         <div ref={hero} className="reveal flex flex-col items-center text-center">
-          <p className="mb-1 text-base font-bold tracking-wide text-river uppercase">{ENDING.kicker}</p>
+          <p className="mb-1 text-base font-bold tracking-wide text-[#17708A] uppercase">{ENDING.kicker}</p>
           <motion.h2
             key={result.tier}
             initial={{ scale: 0.7, opacity: 0 }}

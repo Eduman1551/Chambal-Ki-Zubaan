@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { FACTS } from '../../content/facts'
 import { GURU, STOP3, STOPS } from '../../content/story'
 import { mixColors } from '../../logic/waterColor'
+import { sfx } from '../../sound/sfx'
 import { useRiverStore } from '../../state/useRiverStore'
 import FactNote from '../FactNote'
 import Scene, { NextButton, StoryCard } from '../Scene'
@@ -70,7 +71,10 @@ export default function Stop3Drains() {
   const wasFull = useRef(false)
   useEffect(() => {
     const full = treatment >= 100
-    if (full && !wasFull.current) say(GURU.valveOpen)
+    if (full && !wasFull.current) {
+      say(GURU.valveOpen)
+      sfx.chime()
+    }
     wasFull.current = full
   }, [treatment, say])
 

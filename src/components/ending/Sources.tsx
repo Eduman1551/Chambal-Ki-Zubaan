@@ -8,7 +8,7 @@ export default function Sources() {
       <h3 id="sources-heading" className="text-2xl text-deep md:text-3xl">
         Sources
       </h3>
-      <p className="mt-1 mb-4 text-base font-bold text-river">
+      <p className="mt-1 mb-4 text-base font-bold text-[#17708A]">
         {TITLE.note} Statements stay general until each one is checked against a real source.
       </p>
       <ol className="m-0 grid list-none gap-3 p-0 md:grid-cols-2">
