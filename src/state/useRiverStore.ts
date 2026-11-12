@@ -22,6 +22,8 @@ interface RiverState {
   guruLine: { text: string; key: number } | null
   /** Increases every time the fish-school easter egg is triggered. */
   fishKey: number
+  /** Counts journeys: goes up by one on every "Play again". */
+  run: number
 
   start: () => void
   collect: (id: string) => void
@@ -44,6 +46,7 @@ export const useRiverStore = create<RiverState>((set) => ({
   muted: true,
   guruLine: null,
   fishKey: 0,
+  run: 0,
 
   start: () => set({ phase: 'journey' }),
   collect: (id) => set((s) => (s.collected.includes(id) ? s : { collected: [...s.collected, id] })),
@@ -56,7 +59,15 @@ export const useRiverStore = create<RiverState>((set) => ({
   showFish: () => set((s) => ({ fishKey: s.fishKey + 1 })),
   // "Play again": forget the choices, keep the mute setting.
   reset: () =>
-    set({ phase: 'title', collected: [], treatment: 0, festival: null, currentStop: 0, guruLine: null }),
+    set((s) => ({
+      phase: 'title',
+      collected: [],
+      treatment: 0,
+      festival: null,
+      currentStop: 0,
+      guruLine: null,
+      run: s.run + 1,
+    })),
 }))
 
 /** River Health (0-100) for the current choices. */

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FACTS } from '../../content/facts'
 import { GURU, STOP2, STOPS, type FloatingItem, type ItemKind } from '../../content/story'
 import { POINTS_PER_ITEM } from '../../logic/config'
@@ -90,6 +90,11 @@ interface FloatingProps {
 function Floating({ item, index, collected, onCollect }: FloatingProps) {
   const [fly, setFly] = useState<{ x: number; y: number } | null>(null)
   const gone = collected || fly !== null
+
+  // "Play again" un-collects everything: put the item back in the water.
+  useEffect(() => {
+    if (!collected) setFly(null)
+  }, [collected])
 
   return (
     <motion.button

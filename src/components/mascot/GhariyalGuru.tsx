@@ -10,7 +10,16 @@ const GREEN_DARK = '#3F7F4A'
 const GREEN_LIGHT = '#CFE3B0'
 
 /** The cartoon gharial, drawn with plain SVG shapes. His face follows the mood. */
-export function GuruArt({ mood, className = '' }: { mood: Mood; className?: string }) {
+export function GuruArt({
+  mood,
+  className = '',
+  puddle = true,
+}: {
+  mood: Mood
+  className?: string
+  /** Draw his little patch of river under him. */
+  puddle?: boolean
+}) {
   const happy = mood === 'happy'
   const worried = mood === 'worried'
   return (
@@ -71,9 +80,13 @@ export function GuruArt({ mood, className = '' }: { mood: Mood; className?: stri
         strokeLinecap="round"
       />
       {/* his own little patch of river */}
-      <ellipse cx="120" cy="136" rx="116" ry="14" className="water-fill" />
-      <ellipse cx="96" cy="131" rx="52" ry="5" className="water-fill-light" opacity="0.7" />
-      <ellipse cx="184" cy="136" rx="26" ry="3.5" className="water-fill-light" opacity="0.6" />
+      {puddle && (
+        <>
+          <ellipse cx="120" cy="136" rx="116" ry="14" className="water-fill" />
+          <ellipse cx="96" cy="131" rx="52" ry="5" className="water-fill-light" opacity="0.7" />
+          <ellipse cx="184" cy="136" rx="26" ry="3.5" className="water-fill-light" opacity="0.6" />
+        </>
+      )}
     </svg>
   )
 }
@@ -82,6 +95,7 @@ export function GuruArt({ mood, className = '' }: { mood: Mood; className?: stri
  * Ghariyal Guru lives in the bottom-left corner during the journey.
  * He reacts to the meter (mood), greets each stop and speaks story lines.
  * Easter egg: click him 5 times for a spin.
+ * At the ending he steps out of the corner and appears in the result card instead.
  */
 export default function GhariyalGuru() {
   const health = useHealth()
@@ -104,7 +118,9 @@ export default function GhariyalGuru() {
   useEffect(() => {
     if (lastMood.current === mood) return
     lastMood.current = mood
-    say(GURU.byMood[mood])
+    // wait a moment so a story line that was just spoken can be read first
+    const t = setTimeout(() => say(GURU.byMood[mood]), 3200)
+    return () => clearTimeout(t)
   }, [mood, say])
 
   // Speech bubbles fade after a few seconds.
@@ -127,7 +143,7 @@ export default function GhariyalGuru() {
 
   return (
     <AnimatePresence>
-      {currentStop >= 1 && (
+      {currentStop >= 1 && currentStop <= 5 && (
         <motion.div
           initial={{ y: 140, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import Journey from './components/Journey'
 import { scrollToId } from './hooks/scrollTo'
 import TitleScreen from './components/TitleScreen'
+import Ending from './components/ending/Ending'
 import Hud from './components/hud/Hud'
 import GhariyalGuru from './components/mascot/GhariyalGuru'
 import { useScrollJourney } from './hooks/useScrollJourney'
@@ -44,6 +45,7 @@ export default function App() {
       <main ref={rootRef}>
         <TitleScreen onStart={handleStart} />
         <Journey />
+        <Ending />
       </main>
     </MotionConfig>
   )
