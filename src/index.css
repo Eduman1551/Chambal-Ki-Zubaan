@@ -59,6 +59,8 @@ button {
   border-radius: 8px;
 }
 
+/* Custom pieces live in the components layer so Tailwind utilities can override them. */
+@layer components {
 /* Anything painted with the live water colour changes smoothly. */
 .water-fill {
   fill: var(--water);
@@ -135,6 +137,8 @@ button {
 .btn-teal:disabled {
   box-shadow: 0 5px 0 var(--color-deep);
 }
+
+} /* end @layer components */
 
 /* ── Water + scenery animations (CSS only, GPU friendly) ── */
 @keyframes wave-slide {
