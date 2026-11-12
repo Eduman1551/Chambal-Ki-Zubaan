@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTypedWord } from '../hooks/useTypedWord'
 import { SECRET_WORD } from '../logic/config'
 import { sfx } from '../sound/sfx'
@@ -23,6 +23,13 @@ export default function TitleScreen({ onStart }: Props) {
   // Easter egg: type "kota" while the title screen is showing.
   const onTitle = useRiverStore((s) => s.currentStop === 0)
   const [doria, setDoria] = useState(0)
+  const [doriaOn, setDoriaOn] = useState(false)
+  useEffect(() => {
+    if (!doria) return
+    setDoriaOn(true)
+    const t = setTimeout(() => setDoriaOn(false), 2600) // remove the overlay when the wave is over
+    return () => clearTimeout(t)
+  }, [doria])
   useTypedWord(
     SECRET_WORD,
     () => {
@@ -39,7 +46,7 @@ export default function TitleScreen({ onStart }: Props) {
       className="scene relative flex min-h-[100svh] flex-col overflow-hidden"
       style={{ background: 'linear-gradient(#14506B 0%, #1F8A9E 38%, #F7C98B 78%, #FFE9C4 100%)' }}
     >
-      {doria > 0 && <DoriaWave key={doria} />}
+      {doriaOn && <DoriaWave key={doria} />}
       <div className="relative flex flex-1 flex-col">
         <div className="pointer-events-none absolute inset-0">
           <Sun className="top-[56%] left-[62%] w-44 md:top-[46%] md:left-[68%] md:w-72" />

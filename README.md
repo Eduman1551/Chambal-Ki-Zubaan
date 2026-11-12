@@ -49,6 +49,8 @@ download as a PNG, Play again, Sources and Credits.
   scenery layers sideways (parallax) and reveals the cards.
 - **3D only at Stop 5**: `src/components/three/SanctuaryScene.tsx` is lazy-loaded,
   low-poly, pixel ratio capped, and paused when off-screen.
+- **Smooth on laptops**: scenes that are off screen pause their CSS animations,
+  and everything respects `prefers-reduced-motion`.
 - **Facts**: every factual sentence is in `src/content/facts.ts`.
 
 ## Before presenting (team TODO)

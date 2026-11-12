@@ -153,7 +153,7 @@ export default function GhariyalGuru() {
           transition={{ type: 'spring', stiffness: 160, damping: 18 }}
           className="pointer-events-none fixed bottom-1 left-1 z-40 md:bottom-3 md:left-4"
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {guruLine?.text && (
               <motion.div
                 key={guruLine.key}
