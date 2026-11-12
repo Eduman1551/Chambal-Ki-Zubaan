@@ -166,7 +166,7 @@ export default function Stop2Barrage() {
       waterClass="h-[38svh] min-h-[260px]"
       water={
         <div className="absolute inset-y-0 right-0 left-[26%] md:left-[20%]">
-          <div className="absolute inset-y-0 left-0 w-[76%]">
+          <div className="absolute inset-y-0 left-0 w-[70%] md:w-[76%]">
             {STOP2.items.map((item, i) => (
               <Floating
                 key={item.id}

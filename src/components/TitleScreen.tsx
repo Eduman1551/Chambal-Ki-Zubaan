@@ -42,7 +42,7 @@ export default function TitleScreen({ onStart }: Props) {
       {doria > 0 && <DoriaWave key={doria} />}
       <div className="relative flex flex-1 flex-col">
         <div className="pointer-events-none absolute inset-0">
-          <Sun className="top-[46%] left-[68%] w-48 md:w-72" />
+          <Sun className="top-[56%] left-[62%] w-44 md:top-[46%] md:left-[68%] md:w-72" />
           <Clouds />
           <Birds color="#FFF8EA" />
           <HillsScenery />

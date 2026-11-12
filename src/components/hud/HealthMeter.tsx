@@ -15,7 +15,8 @@ export default function HealthMeter({ large = false }: { large?: boolean }) {
     const diff = health - previous.current
     previous.current = health
     if (diff === 0) return
-    setDelta((d) => ({ value: diff, key: (d?.key ?? 0) + 1 }))
+    // while the chip is showing, keep adding to it (smooth for the slider in Stop 3)
+    setDelta((d) => (d ? { value: d.value + diff, key: d.key } : { value: diff, key: Date.now() }))
     const t = setTimeout(() => setDelta(null), 1400)
     return () => clearTimeout(t)
   }, [health])
@@ -23,10 +24,10 @@ export default function HealthMeter({ large = false }: { large?: boolean }) {
   return (
     <div className={`relative w-full ${large ? 'max-w-xl' : 'max-w-md'}`}>
       <div className="mb-1 flex items-baseline justify-between gap-3">
-        <span className={`font-display font-extrabold text-deep ${large ? 'text-xl' : 'text-sm md:text-base'}`}>
+        <span className={`font-display font-extrabold whitespace-nowrap text-deep ${large ? 'text-xl' : 'text-sm md:text-base'}`}>
           River Health
         </span>
-        <span className={`font-display font-extrabold text-deep tabular-nums ${large ? 'text-2xl' : 'text-sm md:text-lg'}`}>
+        <span className={`font-display font-extrabold whitespace-nowrap text-deep tabular-nums ${large ? 'text-2xl' : 'text-sm md:text-lg'}`}>
           <span aria-hidden>{MOOD_FACE[getMood(health)]} </span>
           {health}
           <span className="text-[0.7em] opacity-70">/100</span>

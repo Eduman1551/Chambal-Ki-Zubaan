@@ -31,7 +31,7 @@ export default function Hud() {
               <HealthMeter />
             </div>
 
-            <nav aria-label="Stops" className="flex shrink-0 items-center gap-1 md:gap-2">
+            <nav aria-label="Stops" className="flex shrink-0 items-center gap-1.5 md:gap-2">
               {STOPS.map((stop, i) => {
                 const n = i + 1
                 const active = currentStop === n
@@ -43,7 +43,7 @@ export default function Hud() {
                     aria-label={`Stop ${n}: ${stop.name}`}
                     aria-current={active ? 'step' : undefined}
                     title={stop.name}
-                    className={`font-display grid h-7 w-7 place-items-center rounded-full border-0 text-sm font-extrabold transition-all md:h-9 md:w-9 md:text-base ${
+                    className={`font-display grid h-3.5 w-3.5 place-items-center rounded-full border-0 p-0 text-sm font-extrabold transition-all sm:h-7 sm:w-7 md:h-9 md:w-9 md:text-base ${
                       active
                         ? 'scale-110 bg-sunset text-white shadow-md'
                         : done
@@ -51,7 +51,7 @@ export default function Hud() {
                           : 'bg-deep/15 text-deep hover:bg-deep/25'
                     }`}
                   >
-                    {n}
+                    <span className="hidden sm:inline">{n}</span>
                   </button>
                 )
               })}

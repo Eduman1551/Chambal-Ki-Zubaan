@@ -57,9 +57,9 @@ export const STOP2 = {
     { id: 'bottle-1', kind: 'bottle', label: 'Plastic bottle', x: 9, y: 18, line: 'One bottle less. It can be recycled now!' },
     { id: 'offering-1', kind: 'offering', label: 'Flower offering in a plastic bag', x: 27, y: 52, line: 'The flowers are lovely. The plastic bag, not so much.' },
     { id: 'coconut-1', kind: 'coconut', label: 'Coconut', x: 44, y: 16, line: 'A coconut! That one belongs in a compost pit.' },
-    { id: 'bottle-2', kind: 'bottle', label: 'Plastic bottle', x: 60, y: 56, line: 'Got it! My snout thanks you.' },
-    { id: 'offering-2', kind: 'offering', label: 'Flower offering in a plastic bag', x: 76, y: 20, line: 'Devotion is beautiful. Next time, skip the bag!' },
-    { id: 'coconut-2', kind: 'coconut', label: 'Coconut', x: 88, y: 58, line: 'Last one? You are on a roll!' },
+    { id: 'bottle-2', kind: 'bottle', label: 'Plastic bottle', x: 52, y: 58, line: 'Got it! My snout thanks you.' },
+    { id: 'offering-2', kind: 'offering', label: 'Flower offering in a plastic bag', x: 80, y: 14, line: 'Devotion is beautiful. Next time, skip the bag!' },
+    { id: 'coconut-2', kind: 'coconut', label: 'Coconut', x: 74, y: 54, line: 'Last one? You are on a roll!' },
   ] satisfies FloatingItem[],
 }
 
