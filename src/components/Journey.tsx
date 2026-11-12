@@ -4,6 +4,7 @@ import { HillsScenery } from './river/Scenery'
 import { Clouds } from './river/Sky'
 import Stop1Source from './stops/Stop1Source'
 import Stop2Barrage from './stops/Stop2Barrage'
+import Stop3Drains from './stops/Stop3Drains'
 
 /** Temporary page for stops that are not built yet. */
 function ComingSoon({ n }: { n: number }) {
@@ -35,7 +36,7 @@ export default function Journey() {
     <>
       <Stop1Source />
       <Stop2Barrage />
-      <ComingSoon n={3} />
+      <Stop3Drains />
       <ComingSoon n={4} />
       <ComingSoon n={5} />
     </>

@@ -39,16 +39,17 @@ export default function Scene({
       id={id}
       data-stop={stop}
       aria-label={label}
-      className="scene relative -mt-8 flex min-h-[100svh] flex-col overflow-hidden rounded-t-[2.25rem] shadow-[0_-14px_40px_-10px_rgba(20,80,107,0.45)]"
+      className="scene relative -mt-8 flex min-h-[100svh] flex-col overflow-hidden lg:h-[100svh] lg:min-h-[660px] rounded-t-[2.25rem] shadow-[0_-14px_40px_-10px_rgba(20,80,107,0.45)]"
       style={{ background: sky, zIndex: stop }}
     >
-      <div className="relative flex flex-1 flex-col">
+      {/* On laptops the page is exactly one screen tall; a tall card overlaps the water instead of pushing it away. */}
+      <div className="relative flex min-h-0 flex-1 flex-col">
         <div className="pointer-events-none absolute inset-0">{scenery}</div>
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-center px-4 pt-24 pb-12 md:px-8">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-1 items-center px-4 pt-24 pb-10 md:px-8 lg:pt-20 lg:pb-6">
           {children}
         </div>
       </div>
-      <Water className={waterClass}>{water}</Water>
+      <Water className={`z-10 ${waterClass}`}>{water}</Water>
     </section>
   )
 }
