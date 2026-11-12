@@ -1,1 +1,337 @@
 @import 'tailwindcss';
+
+/* ── Palette + fonts as Tailwind tokens (mirrors src/logic/config.ts) ── */
+@theme {
+  --color-river: #1f8a9e;
+  --color-deep: #14506b;
+  --color-sunset: #f28c38;
+  --color-sand: #e9d8b4;
+  --color-leaf: #5fa55a;
+  --color-cream: #fff8ea;
+  --color-ink: #2b2b2b;
+  --color-murky: #7a6a3a;
+
+  --font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root {
+  /* Live water colours. JavaScript updates these from River Health. */
+  --water: #4d7a6c;
+  --water-light: #7fa596;
+  --water-deep: #2f5a55;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 500;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sunset);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Anything painted with the live water colour changes smoothly. */
+.water-fill {
+  fill: var(--water);
+  transition: fill 0.9s ease;
+}
+.water-fill-light {
+  fill: var(--water-light);
+  transition: fill 0.9s ease;
+}
+.water-fill-deep {
+  fill: var(--water-deep);
+  transition: fill 0.9s ease;
+}
+.water-bg {
+  background: linear-gradient(var(--water), var(--water-deep));
+}
+
+/* ── Shared UI pieces ── */
+.card {
+  background: color-mix(in srgb, var(--color-cream) 94%, transparent);
+  border-radius: 1.75rem;
+  box-shadow:
+    0 10px 30px -12px rgb(20 80 107 / 0.35),
+    0 2px 0 rgb(255 255 255 / 0.7) inset;
+  border: 2px solid rgb(255 255 255 / 0.75);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  border: 0;
+  color: white;
+  background: var(--color-sunset);
+  box-shadow: 0 5px 0 #c96a1c;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+  touch-action: manipulation;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #c96a1c;
+  filter: brightness(1.05);
+}
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #c96a1c;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 5px 0 #c96a1c;
+}
+.btn-teal {
+  background: var(--color-river);
+  box-shadow: 0 5px 0 var(--color-deep);
+}
+.btn-teal:hover {
+  box-shadow: 0 7px 0 var(--color-deep);
+}
+.btn-teal:active {
+  box-shadow: 0 1px 0 var(--color-deep);
+}
+.btn-teal:disabled {
+  box-shadow: 0 5px 0 var(--color-deep);
+}
+
+/* ── Water + scenery animations (CSS only, GPU friendly) ── */
+@keyframes wave-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.wave {
+  animation: wave-slide linear infinite;
+  will-change: transform;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(3deg);
+  }
+}
+.bob {
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-12vw, 0, 0);
+  }
+  to {
+    transform: translate3d(112vw, 0, 0);
+  }
+}
+.drift {
+  animation: drift linear infinite;
+  will-change: transform;
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.35);
+  }
+}
+.flap {
+  animation: flap 0.7s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+.sway {
+  animation: sway 4s ease-in-out infinite;
+  transform-origin: bottom center;
+  transform-box: fill-box;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.ripple {
+  animation: ripple 2.4s ease-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes pour {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.pour {
+  stroke-dasharray: 14 6;
+  animation: pour 0.7s linear infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12, 0.92) rotate(3deg);
+    opacity: 0.85;
+  }
+}
+.flicker {
+  animation: flicker 0.9s ease-in-out infinite;
+  transform-origin: bottom center;
+  transform-box: fill-box;
+}
+
+@keyframes swim {
+  from {
+    transform: translate3d(-30vw, 0, 0);
+  }
+  to {
+    transform: translate3d(120vw, 0, 0);
+  }
+}
+.swim {
+  animation: swim 6s linear forwards;
+}
+
+@keyframes doria-sweep {
+  0% {
+    transform: translateX(-110%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(110%) skewX(-12deg);
+  }
+}
+
+@keyframes hold-fill {
+  from {
+    stroke-dashoffset: 126;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── Treatment slider (Stop 3) ── */
+.valve-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-murky), var(--color-river));
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.25);
+  cursor: pointer;
+}
+.valve-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-sunset);
+  border: 5px solid white;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.3);
+  transition: transform 0.12s ease;
+}
+.valve-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+.valve-slider::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-sunset);
+  border: 5px solid white;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.3);
+}
+
+/* ── Respect people who prefer less motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .wave,
+  .bob,
+  .drift,
+  .flap,
+  .sway,
+  .ripple,
+  .pour,
+  .flicker {
+    animation: none !important;
+  }
+  .swim {
+    animation-duration: 0.01s !important;
+  }
+}
