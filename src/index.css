@@ -280,6 +280,19 @@ button {
   }
 }
 
+@keyframes doria-label {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  25%,
+  75% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes hold-fill {
   from {
     stroke-dashoffset: 126;

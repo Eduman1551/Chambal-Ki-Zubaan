@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { GURU } from '../../content/story'
 import { GURU_SPIN_CLICKS } from '../../logic/config'
 import { getMood, type Mood } from '../../logic/mood'
+import { sfx } from '../../sound/sfx'
 import { useHealth, useRiverStore } from '../../state/useRiverStore'
 
 const GREEN = '#5FA55A'
@@ -135,6 +136,7 @@ export default function GhariyalGuru() {
     if (clicks.current % GURU_SPIN_CLICKS === 0) {
       say(GURU.spin[spins.current % GURU.spin.length])
       spins.current += 1
+      sfx.boing()
       spin.start({ rotate: [0, 360], scale: [1, 1.25, 1], transition: { duration: 0.9, ease: 'easeInOut' } })
     } else {
       spin.start({ scale: [1, 0.92, 1.05, 1], transition: { duration: 0.3 } })

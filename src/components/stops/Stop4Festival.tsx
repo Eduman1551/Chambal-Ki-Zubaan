@@ -3,6 +3,7 @@ import { FACTS } from '../../content/facts'
 import { GURU, STOP4, STOPS } from '../../content/story'
 import { FESTIVAL_POINTS } from '../../logic/config'
 import type { FestivalChoice } from '../../logic/meter'
+import { sfx } from '../../sound/sfx'
 import { useRiverStore } from '../../state/useRiverStore'
 import FactNote from '../FactNote'
 import Scene, { NextButton, StoryCard } from '../Scene'
@@ -106,6 +107,8 @@ export default function Stop4Festival() {
 
   const pick = (id: FestivalChoice) => {
     chooseFestival(id)
+    if (id === 'dump') sfx.drop()
+    else sfx.chime()
     say(GURU.festival[id])
   }
 

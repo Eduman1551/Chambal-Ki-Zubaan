@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FACTS } from '../../content/facts'
 import { GURU, STOP2, STOPS, type FloatingItem, type ItemKind } from '../../content/story'
 import { POINTS_PER_ITEM } from '../../logic/config'
+import { sfx } from '../../sound/sfx'
 import { useRiverStore } from '../../state/useRiverStore'
 import FactNote from '../FactNote'
 import Scene, { NextButton, StoryCard } from '../Scene'
@@ -140,6 +141,7 @@ export default function Stop2Barrage() {
     const from = el.getBoundingClientRect()
     const to = basketRef.current?.getBoundingClientRect()
     collect(item.id)
+    sfx.pop()
     say(collected.length + 1 === total ? GURU.allCollected : item.line)
     if (!to) return { x: 0, y: -60 }
     return {
