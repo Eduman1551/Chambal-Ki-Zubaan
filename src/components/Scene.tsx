@@ -30,7 +30,7 @@ export default function Scene({
   sky,
   scenery,
   water,
-  waterClass = 'h-[34svh] min-h-[230px]',
+  waterClass = 'h-[32svh] min-h-[220px]',
   label,
   children,
 }: SceneProps) {
@@ -44,7 +44,7 @@ export default function Scene({
     >
       <div className="relative flex flex-1 flex-col">
         <div className="pointer-events-none absolute inset-0">{scenery}</div>
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-center px-4 pt-24 pb-14 md:px-8 md:pt-28">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 items-center px-4 pt-24 pb-12 md:px-8">
           {children}
         </div>
       </div>
@@ -68,7 +68,7 @@ export function StoryCard({
   return (
     <div className={`card reveal w-full max-w-xl p-5 md:p-8 ${className}`}>
       <p className="mb-2 text-sm font-bold tracking-wide text-river uppercase md:text-base">{kicker}</p>
-      <h2 className="mb-3 text-3xl text-deep md:text-[2.6rem]">{title}</h2>
+      <h2 className="mb-3 text-3xl text-deep md:text-4xl">{title}</h2>
       {children}
     </div>
   )

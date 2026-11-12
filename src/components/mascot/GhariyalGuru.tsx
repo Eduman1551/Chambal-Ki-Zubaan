@@ -144,7 +144,7 @@ export default function GhariyalGuru() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 20 }}
-                className="font-display absolute bottom-full left-6 mb-1 w-max max-w-[min(70vw,300px)] origin-bottom-left rounded-2xl rounded-bl-sm bg-white px-4 py-2.5 text-base leading-snug font-semibold text-deep shadow-lg md:left-14 md:text-lg"
+                className="font-display absolute bottom-4 left-full ml-1 w-max max-w-[min(58vw,320px)] origin-bottom-left rounded-2xl rounded-bl-sm bg-white px-4 py-2.5 text-base leading-snug font-semibold text-deep shadow-lg md:bottom-8 md:text-lg"
               >
                 {guruLine.text}
               </motion.div>
