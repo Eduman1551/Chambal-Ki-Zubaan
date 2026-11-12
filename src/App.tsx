@@ -1,9 +1,10 @@
 import { MotionConfig } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import Journey from './components/Journey'
-import { scrollToId } from './components/Scene'
+import { scrollToId } from './hooks/scrollTo'
 import TitleScreen from './components/TitleScreen'
 import Hud from './components/hud/Hud'
+import GhariyalGuru from './components/mascot/GhariyalGuru'
 import { useScrollJourney } from './hooks/useScrollJourney'
 import { getWaterColors } from './logic/waterColor'
 import { useHealth, useRiverStore } from './state/useRiverStore'
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Hud />
+      <GhariyalGuru />
       <main ref={rootRef}>
         <TitleScreen onStart={handleStart} />
         <Journey />

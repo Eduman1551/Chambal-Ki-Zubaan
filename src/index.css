@@ -23,7 +23,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -73,6 +72,10 @@ button {
 .water-fill-deep {
   fill: var(--water-deep);
   transition: fill 0.9s ease;
+}
+.water-stroke {
+  stroke: var(--water-light);
+  transition: stroke 0.9s ease;
 }
 .water-bg {
   background: linear-gradient(var(--water), var(--water-deep));
@@ -322,9 +325,6 @@ button {
 
 /* ── Respect people who prefer less motion ── */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .wave,
   .bob,
   .drift,

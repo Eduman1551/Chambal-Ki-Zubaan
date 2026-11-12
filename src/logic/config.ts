@@ -53,7 +53,7 @@ export const RESULT_OK_MIN = 55
 /** Health at or above this = happy Ghariyal Guru. */
 export const MOOD_HAPPY_MIN = 70
 /** Health at or above this (and below happy) = okay. Below = worried. */
-export const MOOD_OKAY_MIN = 48
+export const MOOD_OKAY_MIN = 40
 
 // ── Pledge card ─────────────────────────────────────────────
 /** The player picks exactly this many pledges. */

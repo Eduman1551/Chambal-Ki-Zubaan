@@ -5,7 +5,11 @@ import type { ReactNode } from 'react'
 const WAVE_PATH =
   'M0 30 Q150 0 300 30 T600 30 T900 30 T1200 30 T1500 30 T1800 30 T2100 30 T2400 30 V64 H0 Z'
 
+const WAVE_LINE = 'M0 30 Q150 8 300 30 T600 30 T900 30 T1200 30 T1500 30 T1800 30 T2100 30 T2400 30'
+
 interface WaveProps {
+  /** Draw only the crest line (used for soft ripples inside the water). */
+  line?: boolean
   fillClass: string
   seconds: number
   top: number
@@ -14,7 +18,7 @@ interface WaveProps {
   reverse?: boolean
 }
 
-function Wave({ fillClass, seconds, top, height, opacity = 1, reverse }: WaveProps) {
+function Wave({ line, fillClass, seconds, top, height, opacity = 1, reverse }: WaveProps) {
   return (
     <div
       className="wave absolute left-0 w-[200%]"
@@ -27,7 +31,11 @@ function Wave({ fillClass, seconds, top, height, opacity = 1, reverse }: WavePro
       }}
     >
       <svg viewBox="0 0 2400 64" preserveAspectRatio="none" className="block h-full w-full">
-        <path d={WAVE_PATH} className={fillClass} />
+        {line ? (
+          <path d={WAVE_LINE} fill="none" strokeWidth="5" strokeLinecap="round" className="water-stroke" vectorEffect="non-scaling-stroke" />
+        ) : (
+          <path d={WAVE_PATH} className={fillClass} />
+        )}
       </svg>
     </div>
   )
@@ -51,11 +59,11 @@ export default function Water({ className = '', children }: WaterProps) {
         <Wave fillClass="water-fill" seconds={11} top={12} height={56} />
       </div>
       <div className="water-bg absolute inset-0 top-5 transition-[background] duration-700" />
-      <div className="pointer-events-none absolute inset-x-0 top-10 h-12 overflow-hidden opacity-40" aria-hidden>
-        <Wave fillClass="water-fill-light" seconds={22} top={0} height={48} />
+      <div className="pointer-events-none absolute inset-x-0 top-12 h-12 overflow-hidden opacity-50" aria-hidden>
+        <Wave line fillClass="" seconds={22} top={0} height={48} />
       </div>
-      <div className="pointer-events-none absolute inset-x-0 top-[45%] h-10 overflow-hidden opacity-25" aria-hidden>
-        <Wave fillClass="water-fill-light" seconds={28} top={0} height={40} reverse />
+      <div className="pointer-events-none absolute inset-x-0 top-[48%] h-10 overflow-hidden opacity-35" aria-hidden>
+        <Wave line fillClass="" seconds={28} top={0} height={40} reverse />
       </div>
       <div className="absolute inset-0">{children}</div>
     </div>

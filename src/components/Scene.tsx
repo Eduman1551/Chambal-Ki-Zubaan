@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { scrollToId } from '../hooks/scrollTo'
 import Water from './river/Water'
 
 interface SceneProps {
@@ -71,11 +72,6 @@ export function StoryCard({
       {children}
     </div>
   )
-}
-
-/** Smooth-scrolls to a section by id. */
-export function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 /** The "keep flowing" button at the end of each stop. */

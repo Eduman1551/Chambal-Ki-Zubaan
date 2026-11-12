@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { STOPS, TITLE } from '../../content/story'
 import { useRiverStore } from '../../state/useRiverStore'
-import { scrollToId } from '../Scene'
+import { scrollToId } from '../../hooks/scrollTo'
 import HealthMeter from './HealthMeter'
 
 /** Fixed top bar shown during the journey: meter, stop dots, sound toggle. */
