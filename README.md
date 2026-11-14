@@ -1,4 +1,4 @@
-# Chambal Ki Zubaan (चंबल की ज़ुबान)
+# Chambal Ki Zubaan
 
 **Let the river speak.** A short interactive scroll story about the health of the
 Chambal river at Kota, Rajasthan. The river tells its own story in first person,
